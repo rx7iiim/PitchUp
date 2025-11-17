@@ -74,7 +74,7 @@ export default function About() {
               <p className="text-gray-700 font-medium">Days</p>
             </div>
             <div>
-              <p className="text-3xl font-bold text-orange-500 mb-1">5</p>
+              <p className="text-3xl font-bold text-orange-500 mb-1">3-5</p>
               <p className="text-gray-700 font-medium">Team Members</p>
             </div>
             <div>
