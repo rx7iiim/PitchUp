@@ -47,7 +47,7 @@ export default function About() {
                 How It Works
               </h3>
               <p className="text-gray-700 leading-relaxed">
-                Participants will work in teams of 5, collaborating to build a
+                Participants will work in teams of 3-5, collaborating to build a
                 functional and impactful project. The experience will conclude
                 with a final presentation delivered to the jury.
               </p>
