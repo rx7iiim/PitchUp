@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 export default function Footer() {
   return (
@@ -11,7 +11,8 @@ export default function Footer() {
               <span className="text-orange-400">PitchUp</span>
             </h3>
             <p className="text-gray-300 text-sm leading-relaxed">
-              Empowering innovators to build the future through technology and creativity.
+              Empowering innovators to build the future through technology and
+              creativity.
             </p>
           </div>
 
@@ -19,21 +20,79 @@ export default function Footer() {
           <div>
             <h4 className="text-lg font-bold mb-4 text-orange-400">Event</h4>
             <ul className="space-y-2">
-              <li><a href="#" className="text-gray-300 hover:text-teal-400 transition-colors">About</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-teal-400 transition-colors">Schedule</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-teal-400 transition-colors">Judges</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-teal-400 transition-colors">Prizes</a></li>
+              <li>
+                <a
+                  href="#"
+                  className="text-gray-300 hover:text-teal-400 transition-colors"
+                >
+                  About
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-gray-300 hover:text-teal-400 transition-colors"
+                >
+                  Schedule
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-gray-300 hover:text-teal-400 transition-colors"
+                >
+                  Judges
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-gray-300 hover:text-teal-400 transition-colors"
+                >
+                  Prizes
+                </a>
+              </li>
             </ul>
           </div>
 
           {/* Resources */}
           <div>
-            <h4 className="text-lg font-bold mb-4 text-orange-400">Resources</h4>
+            <h4 className="text-lg font-bold mb-4 text-orange-400">
+              Resources
+            </h4>
             <ul className="space-y-2">
-              <li><a href="#" className="text-gray-300 hover:text-teal-400 transition-colors">Docs</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-teal-400 transition-colors">API</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-teal-400 transition-colors">FAQ</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-teal-400 transition-colors">Support</a></li>
+              <li>
+                <a
+                  href="#"
+                  className="text-gray-300 hover:text-teal-400 transition-colors"
+                >
+                  Docs
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-gray-300 hover:text-teal-400 transition-colors"
+                >
+                  API
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-gray-300 hover:text-teal-400 transition-colors"
+                >
+                  FAQ
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-gray-300 hover:text-teal-400 transition-colors"
+                >
+                  Support
+                </a>
+              </li>
             </ul>
           </div>
 
@@ -41,12 +100,27 @@ export default function Footer() {
           <div>
             <h4 className="text-lg font-bold mb-4 text-orange-400">Connect</h4>
             <div className="space-y-3">
-              <p className="text-gray-300 text-sm">📧 hello@pitchup.dev</p>
-              <p className="text-gray-300 text-sm">📍 Estin, Estonia</p>
+              <p className="text-gray-300 text-sm">📧 bytecraft@estin.dz</p>
+              <p className="text-gray-300 text-sm">📍 Estin</p>
               <div className="flex gap-4 mt-4">
-                <a href="#" className="text-teal-400 hover:text-orange-400 transition-colors">Twitter</a>
-                <a href="#" className="text-teal-400 hover:text-orange-400 transition-colors">Discord</a>
-                <a href="#" className="text-teal-400 hover:text-orange-400 transition-colors">LinkedIn</a>
+                <a
+                  href="#"
+                  className="text-teal-400 hover:text-orange-400 transition-colors"
+                >
+                  Twitter
+                </a>
+                <a
+                  href="#"
+                  className="text-teal-400 hover:text-orange-400 transition-colors"
+                >
+                  Discord
+                </a>
+                <a
+                  href="#"
+                  className="text-teal-400 hover:text-orange-400 transition-colors"
+                >
+                  LinkedIn
+                </a>
               </div>
             </div>
           </div>
@@ -55,15 +129,32 @@ export default function Footer() {
         {/* Divider */}
         <div className="border-t border-gray-700 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-gray-400 text-sm">© 2025 PitchUp. All rights reserved.</p>
+            <p className="text-gray-400 text-sm">
+              © 2025 PitchUp. All rights reserved.
+            </p>
             <div className="flex gap-6 text-sm">
-              <a href="#" className="text-gray-400 hover:text-teal-400 transition-colors">Privacy</a>
-              <a href="#" className="text-gray-400 hover:text-teal-400 transition-colors">Terms</a>
-              <a href="#" className="text-gray-400 hover:text-teal-400 transition-colors">Cookies</a>
+              <a
+                href="#"
+                className="text-gray-400 hover:text-teal-400 transition-colors"
+              >
+                Privacy
+              </a>
+              <a
+                href="#"
+                className="text-gray-400 hover:text-teal-400 transition-colors"
+              >
+                Terms
+              </a>
+              <a
+                href="#"
+                className="text-gray-400 hover:text-teal-400 transition-colors"
+              >
+                Cookies
+              </a>
             </div>
           </div>
         </div>
       </div>
     </footer>
-  )
+  );
 }
