@@ -1,0 +1,142 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Primary colors - PitchUp theme */
+  --background: #f5f5f0;
+  --foreground: #1a1a1a;
+  --teal: #1a9b8e;
+  --teal-dark: #147a72;
+  --warm-peach: #ff9f43;
+  --orange: #ff7043;
+  --cream: #fdf8f3;
+  --light-cyan: #e8f7f5;
+  --navy: #1a1a2e;
+
+  /* UI tokens */
+  --card: #ffffff;
+  --card-foreground: #1a1a1a;
+  --popover: #ffffff;
+  --popover-foreground: #1a1a1a;
+  --primary: #1a9b8e;
+  --primary-foreground: #ffffff;
+  --secondary: #ff9f43;
+  --secondary-foreground: #ffffff;
+  --muted: #f5f5f0;
+  --muted-foreground: #666666;
+  --accent: #1a9b8e;
+  --accent-foreground: #ffffff;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: #e5e5e0;
+  --input: #ffffff;
+  --ring: #1a9b8e;
+  --chart-1: #1a9b8e;
+  --chart-2: #ff9f43;
+  --chart-3: #1a1a2e;
+  --chart-4: #e8f7f5;
+  --chart-5: #fdf8f3;
+  --radius: 0.625rem;
+  --sidebar: #ffffff;
+  --sidebar-foreground: #1a1a1a;
+  --sidebar-primary: #1a9b8e;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #ff9f43;
+  --sidebar-accent-foreground: #1a1a2e;
+  --sidebar-border: #e5e5e0;
+  --sidebar-ring: #1a9b8e;
+}
+
+.dark {
+  --background: #1a1a2e;
+  --foreground: #f5f5f0;
+  --card: #262642;
+  --card-foreground: #f5f5f0;
+  --popover: #262642;
+  --popover-foreground: #f5f5f0;
+  --primary: #1a9b8e;
+  --primary-foreground: #1a1a2e;
+  --secondary: #ff9f43;
+  --secondary-foreground: #1a1a2e;
+  --muted: #3a3a52;
+  --muted-foreground: #999999;
+  --accent: #ff9f43;
+  --accent-foreground: #1a1a2e;
+  --destructive: #ef4444;
+  --destructive-foreground: #1a1a2e;
+  --border: #3a3a52;
+  --input: #262642;
+  --ring: #1a9b8e;
+  --chart-1: #1a9b8e;
+  --chart-2: #ff9f43;
+  --chart-3: #f5f5f0;
+  --chart-4: #e8f7f5;
+  --chart-5: #fdf8f3;
+  --sidebar: #262642;
+  --sidebar-foreground: #f5f5f0;
+  --sidebar-primary: #1a9b8e;
+  --sidebar-primary-foreground: #1a1a2e;
+  --sidebar-accent: #ff9f43;
+  --sidebar-accent-foreground: #1a1a2e;
+  --sidebar-border: #3a3a52;
+  --sidebar-ring: #1a9b8e;
+}
+
+@theme inline {
+  --font-sans: "Geist", "Geist Fallback";
+  --font-mono: "Geist Mono", "Geist Mono Fallback";
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-teal: #1a9b8e;
+  --color-teal-dark: #147a72;
+  --color-warm-peach: #ff9f43;
+  --color-orange: #ff7043;
+  --color-cream: #fdf8f3;
+  --color-light-cyan: #e8f7f5;
+  --color-navy: #1a1a2e;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
