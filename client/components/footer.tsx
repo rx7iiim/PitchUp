@@ -104,19 +104,19 @@ export default function Footer() {
               <p className="text-gray-300 text-sm">📍 Estin</p>
               <div className="flex gap-4 mt-4">
                 <a
-                  href="#"
+                  href="https://web.facebook.com/ByteCraftEstin"
                   className="text-teal-400 hover:text-orange-400 transition-colors"
                 >
-                  Twitter
+                  Facebook
                 </a>
                 <a
-                  href="#"
+                  href="https://www.instagram.com/bytecraft.club?igsh=MXN3Z3BhaXdmZ2JucQ%3D%3D&utm_source=qr"
                   className="text-teal-400 hover:text-orange-400 transition-colors"
                 >
-                  Discord
+                  Instegram
                 </a>
                 <a
-                  href="#"
+                  href="https://www.linkedin.com/company/bytecraft-club/posts/?feedView=all"
                   className="text-teal-400 hover:text-orange-400 transition-colors"
                 >
                   LinkedIn
@@ -130,7 +130,7 @@ export default function Footer() {
         <div className="border-t border-gray-700 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-gray-400 text-sm">
-              © 2025 PitchUp. All rights reserved.
+              © 2025 a_zine@estin.dz. All rights reserved.
             </p>
             <div className="flex gap-6 text-sm">
               <a

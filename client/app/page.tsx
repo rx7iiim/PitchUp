@@ -8,12 +8,29 @@ import About from "@/components/about";
 export default function Home() {
   return (
     <main className="w-full">
-      <Hero />
-      <About />
-      <Agenda />
-      <Jury />
-      <SignupForm />
-      <Footer />
+      <section id="hero">
+        <Hero />
+      </section>
+
+      <section id="about">
+        <About />
+      </section>
+
+      <section id="agenda">
+        <Agenda />
+      </section>
+
+      <section id="jury">
+        <Jury />
+      </section>
+
+      <section id="signup-section">
+        <SignupForm />
+      </section>
+
+      <section id="footer">
+        <Footer />
+      </section>
     </main>
   );
 }

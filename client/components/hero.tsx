@@ -1,59 +1,160 @@
 "use client";
 
+import { ChevronDown } from "lucide-react";
+
 export default function Hero() {
+  const scrollToSection = () => {
+    const signupForm = document.getElementById("signup-section");
+    signupForm?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-orange-50 via-white to-cyan-50">
-      {/* Decorative shapes */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-10 left-10 w-32 h-32 bg-orange-300 opacity-20 rounded-3xl -rotate-45"></div>
-        <div className="absolute top-20 left-32 w-20 h-20 bg-orange-300 opacity-10 rounded-full"></div>
-        <div className="absolute bottom-20 right-10 w-40 h-40 bg-orange-300 opacity-15 rounded-3xl rotate-12"></div>
+    <section className="relative w-full overflow-hidden min-h-screen">
+      {/* subtle background gradient */}
+      <div className="absolute inset-0 bg-gradient-to-br from-orange-100 via-white to-cyan-50" />
 
-        {/* Circular lines */}
-        <div className="absolute top-1/3 right-1/4 w-96 h-96 border-2 border-teal-600 opacity-10 rounded-full"></div>
-        <div className="absolute bottom-1/4 left-1/3 w-64 h-64 border border-teal-600 opacity-10 rounded-full"></div>
-
-        {/* Decorative dots */}
-        <div className="absolute top-1/4 right-1/3 w-2 h-2 bg-gray-900 rounded-full"></div>
-        <div className="absolute top-1/2 left-1/4 w-2 h-2 bg-gray-900 rounded-full"></div>
-        <div className="absolute bottom-1/3 right-1/5 w-3 h-3 bg-gray-900 rounded-full"></div>
+      {/* Left geometry - hide on very small screens */}
+      <div className="absolute left-0 top-0 pointer-events-none hidden sm:block sm:w-48 md:w-80 lg:w-96 h-auto">
+        <img
+          src="/Group%202838.png"
+          alt="Left geometry"
+          className="w-full h-full object-cover"
+          aria-hidden
+        />
       </div>
 
-      <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
-        <div className="mb-6">
-          <p className="text-teal-600 text-sm font-semibold tracking-widest uppercase mb-2">
-            Welcome to
+      {/* Right bottom geometry - smaller on small screens */}
+      <div className="absolute right-0 bottom-0 pointer-events-none opacity-80 hidden sm:block sm:w-40 md:w-72 lg:w-96 h-auto">
+        <img
+          src="/Group%202840.png"
+          alt="Right geometry"
+          className="w-full h-full object-cover"
+          aria-hidden
+        />
+      </div>
+
+      {/* Top-right accent - subtle, hide on xs */}
+      <div className="absolute top-4 right-4 pointer-events-none opacity-60 hidden xs:hidden sm:block sm:w-20 md:w-32 lg:w-48 h-auto">
+        <img
+          src="/Group%202841.png"
+          alt="Top right accent"
+          className="w-full h-full object-cover"
+          aria-hidden
+        />
+      </div>
+
+      {/* Concentric circles centered and responsive */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <div className="absolute rounded-full border border-cyan-200/30 w-40 sm:w-60 md:w-80 lg:w-[28rem] h-40 sm:h-60 md:h-80 lg:h-[28rem]" />
+        <div className="absolute rounded-full border border-cyan-200/20 w-56 sm:w-80 md:w-[24rem] lg:w-[34rem] h-56 sm:h-80 md:h-[24rem] lg:h-[34rem]" />
+        <div className="absolute rounded-full border border-cyan-200/10 w-72 sm:w-[28rem] md:w-[36rem] lg:w-[42rem] h-72 sm:h-[28rem] md:h-[36rem] lg:h-[42rem]" />
+      </div>
+
+      {/* Tech circuit lines - top-right (small and hidden on smallest screens) */}
+      <div className="absolute top-16 right-6 sm:right-20 w-28 sm:w-40 h-28 sm:h-40 pointer-events-none opacity-70 hidden xs:hidden sm:block">
+        <img
+          src="/Group%202836.png"
+          alt="Tech circuit top"
+          className="w-full h-full object-contain"
+          aria-hidden
+        />
+      </div>
+
+      {/* Tech circuit lines - bottom-left */}
+      <div className="absolute bottom-20 left-4 sm:bottom-32 sm:left-8 w-28 sm:w-40 h-28 sm:h-40 pointer-events-none opacity-70 hidden xs:hidden sm:block">
+        <img
+          src="/Group%202837.png"
+          alt="Tech circuit bottom"
+          className="w-full h-full object-contain"
+          aria-hidden
+        />
+      </div>
+
+      {/* Decorative icon cards - hidden on smallest screens */}
+      <div className="absolute top-1/3 left-6 sm:left-12 w-16 sm:w-24 h-16 sm:h-24 pointer-events-none opacity-80 hidden xs:hidden sm:block">
+        <img
+          src="/pic-2.png"
+          alt="Chart icon"
+          className="w-full h-full object-contain"
+          aria-hidden
+        />
+      </div>
+
+      <div className="absolute top-1/4 right-8 sm:right-16 w-16 sm:w-24 h-16 sm:h-24 pointer-events-none opacity-80 hidden xs:hidden sm:block">
+        <img
+          src="/pic.png"
+          alt="Idea icon"
+          className="w-full h-full object-contain"
+          aria-hidden
+        />
+      </div>
+
+      {/* Decorative sparkles - tone down on small screens */}
+      <div className="absolute top-28 left-1/2 transform -translate-x-1/2 text-xl sm:text-2xl text-black opacity-40">
+        ✦
+      </div>
+      <div className="absolute top-44 right-1/3 text-lg sm:text-xl text-black opacity-30 hidden sm:block">
+        ✦
+      </div>
+      <div className="absolute bottom-44 left-1/3 text-lg text-black opacity-30 hidden md:block">
+        ✦
+      </div>
+      <div className="absolute bottom-36 right-1/4 text-xl text-black opacity-30 hidden sm:block">
+        ✦
+      </div>
+
+      {/* Main content (above decorations) */}
+      <div className="relative z-10 w-full px-6 py-16 flex flex-col items-center justify-center text-center min-h-screen">
+        {/* Logo container */}
+        <div className="mb-6 flex items-center justify-center h-44 sm:h-56 md:h-72">
+          <img
+            src="/Group%202828.png"
+            alt="PitchUp Logo"
+            className="h-full object-cover"
+          />
+        </div>
+
+        {/* Text logo */}
+        <div className="mb-6 -mt-8">
+          <img
+            src="/PitchUp.png"
+            alt="PitchUp Text"
+            className="h-14 sm:h-20 md:h-24 mx-auto"
+          />
+        </div>
+
+        {/* Tagline */}
+        <p className="text-xl sm:text-2xl md:text-3xl font-bold text-teal-600 mb-8 flex items-center justify-center gap-2">
+          <span className="text-2xl sm:text-3xl text-teal-600">●</span>
+          Think fast . Break down . PitchUp
+        </p>
+
+        {/* Event details box - reposition for mobile */}
+        <div className="absolute right-4 bottom-6 sm:right-8 sm:bottom-24 bg-gradient-to-r from-orange-400 to-orange-500 text-white rounded-2xl px-6 py-3 shadow-lg">
+          <p className="text-xs sm:text-sm font-semibold">📍 Estin</p>
+          <p className="text-sm sm:text-lg md:text-xl font-bold">
+            20-21-22 nov
           </p>
-          <h1 className="text-6xl md:text-7xl font-bold text-gray-900 mb-4">
-            <span className="text-orange-400">PitchUp</span>
-          </h1>
         </div>
 
-        <p className="text-xl md:text-2xl text-teal-600 font-semibold mb-6">
-          Think Fast. Break Down. PitchUp.
-        </p>
-
-        <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
-          Join the ultimate hackathon experience where ideas come to life.
-          Assemble your team, showcase your innovation, and compete for amazing
-          prizes.
-        </p>
-
-        <div className="inline-block bg-gradient-to-r from-orange-400 to-orange-500 rounded-3xl px-8 py-6 text-white mb-8">
-          <p className="text-4xl font-bold mb-2">Nov 20-22</p>
-          <p className="text-lg">📍 Estin</p>
-        </div>
-
-        <button className="px-8 py-4 bg-teal-600 text-white text-lg font-semibold rounded-full hover:bg-teal-700 transition-colors shadow-lg">
+        {/* CTA button */}
+        <button
+          onClick={scrollToSection}
+          aria-label="Register your team"
+          className="mt-6 px-8 sm:px-10 py-3 sm:py-4 bg-gradient-to-r from-orange-400 to-orange-500 text-white font-bold text-base sm:text-lg rounded-full hover:shadow-lg transition-all duration-300 transform hover:scale-105"
+        >
           Register Your Team
         </button>
       </div>
 
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <div className="w-6 h-10 border-2 border-teal-600 rounded-full flex items-center justify-center">
-          <div className="w-1 h-2 bg-teal-600 rounded-full"></div>
-        </div>
-      </div>
+      {/* Scroll indicator - stays usable on all sizes */}
+      <button
+        onClick={scrollToSection}
+        aria-label="Scroll to signup section"
+        className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-20 hover:text-teal-600 transition-colors"
+      >
+        <ChevronDown className="w-6 h-6 text-teal-600 animate-bounce" />
+      </button>
     </section>
   );
 }
