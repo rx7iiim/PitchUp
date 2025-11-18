@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { createClient } from "@/lib/client";
 
 export default function SignupForm() {
   const [teamMembers, setTeamMembers] = useState([
@@ -15,6 +16,28 @@ export default function SignupForm() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  const [rateLimitRemaining, setRateLimitRemaining] = useState(0);
+
+  useEffect(() => {
+    const lastSubmitTime = localStorage.getItem("pitchup_last_submit");
+    if (lastSubmitTime) {
+      const elapsed = Date.now() - parseInt(lastSubmitTime);
+      const remainingMs = 60000 - elapsed; // 60 second cooldown
+      if (remainingMs > 0) {
+        setRateLimitRemaining(Math.ceil(remainingMs / 1000));
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    if (rateLimitRemaining > 0) {
+      const timer = setTimeout(() => {
+        setRateLimitRemaining(rateLimitRemaining - 1);
+      }, 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [rateLimitRemaining]);
+
   const handleMemberChange = (
     index: number,
     field: "name" | "email" | "github" | "linkedin" | "motivation",
@@ -27,6 +50,13 @@ export default function SignupForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (rateLimitRemaining > 0) {
+      setError(
+        `Please wait ${rateLimitRemaining} seconds before submitting again`
+      );
+      return;
+    }
 
     const filledMembers = teamMembers.filter((m) => m.name && m.email);
     if (!teamName) {
@@ -42,25 +72,43 @@ export default function SignupForm() {
     setError(null);
 
     try {
-      const response = await fetch(
-        "https://vbmenaxpynlkmeqpetsx.supabase.co/functions/v1/quick-responder",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            teamName,
-            teamMembers: filledMembers,
-          }),
-        }
-      );
+      const supabase = createClient();
 
-      const result = await response.json();
+      const { data: teamData, error: teamError } = await supabase
+        .from("teams")
+        .insert([{ team_name: teamName }])
+        .select();
 
-      if (!response.ok) {
-        throw new Error(result.error || "Failed to register team");
+      if (teamError) throw teamError;
+      if (!teamData || teamData.length === 0)
+        throw new Error("Failed to create team");
+
+      const teamId = teamData[0].id;
+
+      const membersToInsert = teamMembers
+        .map((member, index) => ({
+          team_id: teamId,
+          name: member.name,
+          email: member.email,
+          github: member.github || null,
+          linkedin: member.linkedin || null,
+          motivation: member.motivation || null,
+          member_number: index + 1,
+        }))
+        .filter((member) => member.name && member.email);
+
+      if (membersToInsert.length < 3) {
+        throw new Error("At least 3 team members are required");
       }
+
+      const { error: membersError } = await supabase
+        .from("team_members")
+        .insert(membersToInsert);
+
+      if (membersError) throw membersError;
+
+      localStorage.setItem("pitchup_last_submit", Date.now().toString());
+      setRateLimitRemaining(60);
 
       setSubmitted(true);
       setTimeout(() => setSubmitted(false), 3000);
@@ -74,7 +122,11 @@ export default function SignupForm() {
         { name: "", email: "", github: "", linkedin: "", motivation: "" },
       ]);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to register team");
+      setError(
+        err instanceof Error
+          ? err.message
+          : "Failed to register team. Please try again."
+      );
     } finally {
       setIsLoading(false);
     }
@@ -88,7 +140,7 @@ export default function SignupForm() {
             Join the Hackathon
           </h2>
           <p className="text-lg text-gray-600">
-            Register your team (minimum 3 members)
+            Register your team (minimum 3 members, maximum 5)
           </p>
           <div className="h-1 w-20 bg-gradient-to-r from-teal-600 to-orange-400 mx-auto rounded-full mt-4"></div>
         </div>
@@ -105,7 +157,7 @@ export default function SignupForm() {
               onChange={(e) => setTeamName(e.target.value)}
               className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-100 text-base disabled:opacity-50 disabled:cursor-not-allowed"
               required
-              disabled={isLoading}
+              disabled={isLoading || rateLimitRemaining > 0}
             />
           </div>
 
@@ -144,7 +196,7 @@ export default function SignupForm() {
                         }
                         className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:border-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-100 disabled:opacity-50 disabled:cursor-not-allowed"
                         required={index < 3}
-                        disabled={isLoading}
+                        disabled={isLoading || rateLimitRemaining > 0}
                       />
                     </div>
                     <div>
@@ -160,7 +212,7 @@ export default function SignupForm() {
                         }
                         className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:border-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-100 disabled:opacity-50 disabled:cursor-not-allowed"
                         required={index < 3}
-                        disabled={isLoading}
+                        disabled={isLoading || rateLimitRemaining > 0}
                       />
                     </div>
                     <div>
@@ -175,7 +227,7 @@ export default function SignupForm() {
                           handleMemberChange(index, "github", e.target.value)
                         }
                         className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:border-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-100 disabled:opacity-50 disabled:cursor-not-allowed"
-                        disabled={isLoading}
+                        disabled={isLoading || rateLimitRemaining > 0}
                       />
                     </div>
                     <div>
@@ -190,7 +242,7 @@ export default function SignupForm() {
                           handleMemberChange(index, "linkedin", e.target.value)
                         }
                         className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:border-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-100 disabled:opacity-50 disabled:cursor-not-allowed"
-                        disabled={isLoading}
+                        disabled={isLoading || rateLimitRemaining > 0}
                       />
                     </div>
                     <div>
@@ -209,7 +261,7 @@ export default function SignupForm() {
                         }
                         className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:border-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-100 disabled:opacity-50 disabled:cursor-not-allowed resize-none"
                         rows={3}
-                        disabled={isLoading}
+                        disabled={isLoading || rateLimitRemaining > 0}
                       />
                     </div>
                   </div>
@@ -228,13 +280,17 @@ export default function SignupForm() {
             <button
               type="submit"
               className="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold py-4 rounded-full text-lg transition-all hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
-              disabled={isLoading}
+              disabled={isLoading || rateLimitRemaining > 0}
             >
-              {isLoading ? "Registering Team..." : "Register Team"}
+              {rateLimitRemaining > 0
+                ? `Please wait ${rateLimitRemaining}s before submitting again`
+                : isLoading
+                ? "Registering Team..."
+                : "Register Team"}
             </button>
             {submitted && (
               <div className="mt-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded-lg text-center font-semibold">
-                ✓ Team registered successfully! We&apos;ll contact you soon.
+                ✓ Team registered successfully! We'll contact you soon.
               </div>
             )}
           </div>
