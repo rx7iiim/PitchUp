@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { createClient } from "@/lib/client";
 
 export default function SignupForm() {
   const [teamMembers, setTeamMembers] = useState([
@@ -43,40 +42,25 @@ export default function SignupForm() {
     setError(null);
 
     try {
-      const supabase = createClient();
+      const response = await fetch(
+        "https://vbmenaxpynlkmeqpetsx.supabase.co/functions/v1/quick-responder",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            teamName,
+            teamMembers: filledMembers,
+          }),
+        }
+      );
 
-      const { data: teamData, error: teamError } = await supabase
-        .from("teams")
-        .insert([{ team_name: teamName }])
-        .select();
+      const result = await response.json();
 
-      if (teamError) throw teamError;
-      if (!teamData || teamData.length === 0)
-        throw new Error("Failed to create team");
-
-      const teamId = teamData[0].id;
-
-      const membersToInsert = teamMembers
-        .map((member, index) => ({
-          team_id: teamId,
-          name: member.name,
-          email: member.email,
-          github: member.github || null,
-          linkedin: member.linkedin || null,
-          motivation: member.motivation || null,
-          member_number: index + 1,
-        }))
-        .filter((member) => member.name && member.email);
-
-      if (membersToInsert.length < 3) {
-        throw new Error("At least 3 team members are required");
+      if (!response.ok) {
+        throw new Error(result.error || "Failed to register team");
       }
-
-      const { error: membersError } = await supabase
-        .from("team_members")
-        .insert(membersToInsert);
-
-      if (membersError) throw membersError;
 
       setSubmitted(true);
       setTimeout(() => setSubmitted(false), 3000);
@@ -87,13 +71,10 @@ export default function SignupForm() {
         { name: "", email: "", github: "", linkedin: "", motivation: "" },
         { name: "", email: "", github: "", linkedin: "", motivation: "" },
         { name: "", email: "", github: "", linkedin: "", motivation: "" },
+        { name: "", email: "", github: "", linkedin: "", motivation: "" },
       ]);
     } catch (err) {
-      setError(
-        err instanceof Error
-          ? err.message
-          : "Failed to register team. Please try again."
-      );
+      setError(err instanceof Error ? err.message : "Failed to register team");
     } finally {
       setIsLoading(false);
     }
