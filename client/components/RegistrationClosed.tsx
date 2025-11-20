@@ -128,7 +128,7 @@ export default function RegistrationClosed() {
         {/* Small info box */}
         <div className="mt-8 bg-gradient-to-r from-orange-400 to-orange-500 text-white rounded-2xl px-6 py-3 shadow-lg">
           <p className="text-sm sm:text-lg md:text-xl font-bold">
-            Event been cancelled
+            Event has been cancelled
           </p>
         </div>
       </div>
